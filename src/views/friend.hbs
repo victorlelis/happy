@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{friend.name}} | Happy</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+  <link rel="icon" href="/images/logo-icon.png">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/sidebar.css">
+  <link rel="stylesheet" href="/css/map.css">
+  <link rel="stylesheet" href="/css/buttons.css">
+  <link rel="stylesheet" href="/css/page-friend.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="page-friend">
+    <aside class="animate-right sidebar">
+      <a href="/">
+        <img src="/images/map-marker.svg" alt="Happy">
+      </a>
+
+      <footer>
+        <button onclick="history.back()">
+          <img src="/images/arrow-back.svg" alt="Voltar">
+        </button>
+      </footer>
+    </aside>
+
+    <main class="animate-appear width-sidebar">
+      <div class="friend-details">
+        <img src="{{friend.firstImage}}" alt="{{friend.name}}">
+
+        <div class="images">
+          {{#each friend.images}}
+          <button onclick="selectImage(event)" class="active" type="button">
+            <img src="{{this}}" alt="Lar das meninas}">
+          </button>
+          {{/each}}
+        </div>
+
+        <div class="friend-details-content">
+          <h1>A história de {{friend.name}}</h1>
+
+          <p>{{friend.store}}</p>
+
+          <hr>
+
+          <div class="friend-container">
+            <h2>Dados</h2>
+
+            <p>Cachorro - Fêmea - Grande</p>
+          </div>
+
+          <div class="friend-container">
+            <h2>Personalidade</h2>
+
+            <p><span class="friend-type">Temperamentos: </span>{{friend.temperaments}}</p>
+
+            <p><span class="friend-type">Sociável com: </span>{{friend.sociable}}</p>
+          </div>
+
+          <div class="friend-container">
+            <h2>Outras Informações</h2>
+
+            <p><span class="friend-type">Alimentação: </span>{{friend.food}}</p>
+
+            <p><span class="friend-type">Saúde: </span>
+              {{#if friend.health}}
+              {{friend.health}}
+              {{else}}
+              Nenhum problema de saúde
+              {{/if}}
+            </p>
+          </div>
+
+          <hr>
+
+          <div class="map-container">
+            <div id="mapid"></div>
+            <span hidden data-lat="{{friend.lat}}" data-lng="{{friend.lng}}"></span>
+            <footer>
+              <a target="_blank" href="https://maps.google.com/mobile?q={{friend.lat}},{{friend.lng}}&z=15">Ver rotas no Google Maps</a>
+            </footer>
+          </div>
+
+          <a href="https://api.whatsapp.com/send?l=pt_BR&phone={{friend.whatsapp}}&text=Oi, quero conversar sobre visitas no {{friend.name}}" target="_blank" class="primary-button">
+            <img src="/images/whatsapp.svg" alt="Chamar no whatsapp">
+            Entrar em contato
+          </a>
+
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+  <script src="/scripts/token.js"></script>
+  <script src="/scripts/page-friend.js"></script>
+</body>
+
+</html>
